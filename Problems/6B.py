@@ -1,26 +1,23 @@
-t = int(input())
+n, m, c = input().split()
+n = int(n)
+m = int(m)
 
-for _ in range(t):
-   n = int(input())
+grid = [input().strip() for _ in range(n)]
 
-   p = [0] * (n + 1)
-   used = [False] * (n + 1)
+deputies = set()
 
-   p[n - 1] = 1
-   p[n] = n
-   used[1] = used[n] = True
+# directions: up, down, left, right
+dirs = [(1,0), (-1,0), (0,1), (0,-1)]
 
-   for i in range(n - 2, 0, -1):
-      y = p[i + 1]
+for i in range(n):
+    for j in range(m):
+        if grid[i][j] == c:
+            for dx, dy in dirs:
+                ni, nj = i + dx, j + dy
+                
+                if 0 <= ni < n and 0 <= nj < m:
+                    if grid[ni][nj] != '.' and grid[ni][nj] != c:
+                        deputies.add(grid[ni][nj])
 
-      x1 = y + i
-      x2 = y - i
+print(len(deputies))
 
-      if 1 <= x1 <= n and not used[x1]:
-         p[i] = x1
-         used[x1] = True
-      else:
-         p[i] = x2
-         used[x2] = True
-
-print(*p[1:])

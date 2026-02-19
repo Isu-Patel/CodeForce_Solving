@@ -15,4 +15,3 @@ for _ in range(n):
       db[name] += 1
 
       db[new_name] = 1
-      
