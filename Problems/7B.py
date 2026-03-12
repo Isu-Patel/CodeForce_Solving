@@ -63,3 +63,5 @@ for _ in range(t):
 
         memory = new_memory
         blocks = new_blocks
+
+    
