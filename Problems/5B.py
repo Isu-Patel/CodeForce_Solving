@@ -1,30 +1,47 @@
 import sys
 
-# read all lines (including empty ones)
-lines = sys.stdin.read().splitlines()
+# Read all lines
+lines = []
+for line in sys.stdin:
+    lines.append(line.rstrip('\n'))
 
-# find max width
-width = max(len(line) for line in lines)
+# Find maximum length
+max_len = max(len(line) for line in lines)
 
-border = "*" * (width + 2)
-print(border)
+# Width of the frame content (excluding the asterisks)
+width = max_len
 
-left_turn = True  # for alternating extra space
+# Print top border
+print('*' * (width + 2))
 
+# Track which side gets extra space for uneven padding
+left_turn = True
+
+# Print each line centered
 for line in lines:
-    L = len(line)
-    total = width - L
+    line_len = len(line)
+    total_padding = width - line_len
     
-    left = total // 2
-    right = total // 2
-    
-    if total % 2 == 1:
-        if left_turn:
-            left += 1
-        else:
-            right += 1
-        left_turn = not left_turn
-    
-    print("*" + " " * left + line + " " * right + "*")
+    if total_padding == 0:
+        # No padding needed
+        print('*' + line + '*')
+    else:
+        # Calculate left and right padding
+        left_pad = total_padding // 2
+        right_pad = total_padding - left_pad
+        
+        # If padding is odd, alternate which side gets extra space
+        if total_padding % 2 == 1:
+            if left_turn:
+                # Extra space goes to the right (less on left)
+                pass  # left_pad and right_pad already set correctly
+            else:
+                # Extra space goes to the left (less on right)
+                left_pad += 1
+                right_pad -= 1
+            left_turn = not left_turn
+        
+        print('*' + ' ' * left_pad + line + ' ' * right_pad + '*')
 
-print(border)
+# Print bottom border
+print('*' * (width + 2))
