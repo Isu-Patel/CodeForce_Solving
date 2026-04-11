@@ -13,3 +13,5 @@ for _ in range(t):
     total = n * m
 
     print(total - reachable)
+
+
