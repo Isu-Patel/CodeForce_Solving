@@ -5,7 +5,7 @@ def main():
     data = sys.stdin.read().strip().split()
     if not data:
         return
-    A, B, C = map(int, dat[:3])
+    A, B, C = map(int, data[:3])
 
     if A == 0:
         if B == 0:
@@ -37,4 +37,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-    
