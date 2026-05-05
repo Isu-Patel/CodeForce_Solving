@@ -7,34 +7,35 @@ n = int(data[0])
 m = int(data[1])
 v = int(data[2])
 
-if m < 2 * n - 4:
+min_m = 2 * n - 4
+max_m = min_m + ((n - 3) * (n - 4) // 2)
+
+if m < min_m or m > max_m:
     print(-1)
     sys.exit(0)
 
-# Determine groupA and groupB
-if v == 1:
-    groupA = [2]
-    groupB = list(range(3, n + 1))
-elif v == n:
-    groupA = list(range(1, n - 1))
-    groupB = [n - 1]
-else:
-    groupA = list(range(1, v))
-    groupB = list(range(v + 1, n + 1))
+all_servers = [i for i in range(1, n + 1) if i != v]
+groupA = [all_servers[0]]
+groupB = all_servers[1:]
 
 edges = []
 
-# Connect v to all in groupA and groupB
-for server in groupA + groupB:
-    edges.append((v, server))
+# Connect v to all
+for s in all_servers:
+    edges.append((v, s))
 
-# Connect groupA in a path
-for i in range(len(groupA) - 1):
-    edges.append((groupA[i], groupA[i + 1]))
-
-# Connect groupB in a path
+# Path in groupB
 for i in range(len(groupB) - 1):
     edges.append((groupB[i], groupB[i + 1]))
+
+# Add extra edges in groupB
+extra = m - len(edges)
+idx = 0
+for i in range(1, len(groupB)):
+    if extra == 0:
+        break
+    edges.append((groupB[0], groupB[i]))
+    extra -= 1
 
 # Output the edges
 for edge in edges:
