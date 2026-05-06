@@ -18,7 +18,6 @@ segments.sort(key=lambda x: x[1])
 
 points = []
 i = 0
-
 while i < n:
     _, r = segments[i]
     points.append(r)
@@ -27,7 +26,5 @@ while i < n:
         j += 1
     i = j
 
-out = []
-out.append(str(len(points)))
-out.append(' '.join(map(str(x) for x in points)))
-sys.stdout.write('\n'.join(out))
+print(len(points))
+print(" ".join(str(x) for x in points))
