@@ -1,40 +1,52 @@
 import sys
+from collections import defaultdict
 
-data = sys.stdin.read().splitlines()
-if not data:
-    sys.exit(0)
+input = sys.stdin.readline
 
-line_it = iter(data)
-t = int(next(line_it).strip())
-score_table = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1]
+t = int(input())
 
-drivers = {}
+# Formula 1 points
+score = [25, 18, 15, 12, 10, 8, 6, 4, 2, 1]
+
+# stats[name] = [points, places[]]
+stats = defaultdict(lambda: [0, [0]*50])
+
 for _ in range(t):
-    n = int(next(line_it).strip())
-    for pos in range(1, n + 1):
-        name = next(line_it).strip()
-        if name not in drivers:
-            drivers[name] = {"points": 0, "places": [0] * 50}
-        if pos <= 10:
-            drivers[name]["points"] += score_table[pos - 1]
-        drivers[name]["places"[pos - 1]] += 1
+    n = int(input())
 
-orig_best = max(
-    drivers.items(),
-    key=lambda item: (
-        -item[1]["points"],
-        tuple(-item[1]["places"][i] for i in range(50)),
-    ),
-)[0]
+    for pos in range(n):
+        name = input().strip()
 
-alt_best = max(
-    drivers.items(),
-    key=lambda item: (
-        -item[1]["places"][0],
-        -item[1]["points"],
-        tuple(-item[1]["places"][i] for i in range(50)),
-    ),
-)[0]
+        # points
+        if pos < 10:
+            stats[name][0] += score[pos]
 
-print(orig_best)
-print(alt_best)
+        # count finishing positions
+        stats[name][1][pos] += 1
+
+
+drivers = list(stats.keys())
+
+# ---------- Original System ----------
+# points -> wins -> 2nd -> 3rd ...
+champ1 = max(
+    drivers,
+    key=lambda x: (
+        stats[x][0],          # points
+        *stats[x][1]          # places
+    )
+)
+
+# ---------- Alternative System ----------
+# wins -> points -> 2nd -> 3rd ...
+champ2 = max(
+    drivers,
+    key=lambda x: (
+        stats[x][1][0],       # wins
+        stats[x][0],          # points
+        *stats[x][1][1:]      # remaining places
+    )
+)
+
+print(champ1)
+print(champ2)
