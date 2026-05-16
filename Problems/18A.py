@@ -11,6 +11,8 @@ def is_right(p1, p2, p3):
     d12 = dist_sq(p1, p2)
     d13 = dist_sq(p1, p3)
     d23 = dist_sq(p2, p3)
+    if d12 == 0 or d13 == 0 or d23 == 0:
+        return False
     if d12 + d13 == d23 or d12 + d23 == d13 or d13 + d23 == d12:
         return True
     return False
@@ -22,7 +24,7 @@ p3 = (x3, y3)
 if is_right(p1, p2, p3):
     print("RIGHT")
 else:
-    moves = [(0,1),(0,-1),(1,0),(-1,0),(1,1),(1,-1),(-1,1),(-1,-1)]
+    moves = [(0,1),(0,-1),(1,0),(-1,0)]
     almost = False
     for i, p in enumerate([p1, p2, p3]):
         for dx, dy in moves:
