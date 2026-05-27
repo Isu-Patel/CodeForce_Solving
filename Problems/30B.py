@@ -20,7 +20,7 @@ def valid(d, m, y):
             31, 31, 30, 31, 30, 31]
 
     if leap(y):
-        days[1] = 29
+        days[1] = 29#0
 
     return 1 <= d <= days[m - 1]
 
