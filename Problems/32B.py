@@ -1,6 +1,6 @@
 s = input().strip()
 
-ans = 0
+ans = []
 i = 0
 
 while i < len(s):
