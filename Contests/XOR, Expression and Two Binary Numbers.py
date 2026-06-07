@@ -34,10 +34,10 @@ for _ in range(t):
     cnt1 = (m + 1) // 3
     cnt2 = m // 3
 
-    ans = {
+    ans = (
         cnt0 * p0 * (n - p0) +
         cnt1 * p1 * (n - p1) +
         cnt2 * p2 * (n - p2)
-    }
+    )
 
     print(ans)
