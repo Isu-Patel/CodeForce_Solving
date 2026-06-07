@@ -1,7 +1,6 @@
 # Hello Myself Isu Patel. I solve CodeForce problems and submit on github for people for easy to check code.
 # This is Code is written by me only.
 import sys
-
 input = sys.stdin.readline
 
 t = int(input())
