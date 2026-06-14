@@ -1,21 +1,13 @@
 n = int(input())
 a = list(map(int, input().split()))
 
-max_sum = float('-inf')
+total = sum(a)
 
-for p in range(n + 1):
-    for s in range(n + 1):
-        current_sum = 0
-        
-        for i in range(n):
-            in_prefix = i < p
-            in_suffix = i >= n - s
-            
-            if in_prefix ^ in_suffix:
-                current_sum += -a[i]
-            else:
-                current_sum += a[i]
-        
-        max_sum = max(max_sum, current_sum)
+cur = a[0]
+best = a[0]
 
-print(max_sum)
+for x in a[1:]:
+    cur = max(x, cur + x)
+    best = max(best, cur)
+
+print(-total + 2 * max*(0, best))
