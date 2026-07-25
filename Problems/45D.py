@@ -12,7 +12,7 @@ used = set()
 ans = [0] * n
 
 for r, l, idx in events:
-    day = 1
+    day = l
 
     while day in used:
         day += 1
