@@ -1,17 +1,23 @@
 n = int(input())
 
-used = set()
-ans = []
+events = []
 
-for _ in range(n):
+for i in range(n):
     l, r = map(int, input().split())
+    events.append((r, l, i))
 
-    day = l
+events.sort()
+
+used = set()
+ans = [0] * n
+
+for r, l, idx in events:
+    day = 1
 
     while day in used:
         day += 1
 
+    ans[idx] = day
     used.add(day)
-    ans.append(day)
 
 print(*ans)
