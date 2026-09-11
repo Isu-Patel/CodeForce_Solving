@@ -1,4 +1,5 @@
 import sys
+import math
 
 input = sys.stdin.readline
 
@@ -12,14 +13,13 @@ last = 0
 ans = 0
 
 for day in holidays:
-    while day - last > K:
-        last += K
-        ans += 1
+    gap = day - last
 
-    last = day
+    ans += (gap + K - 1) // K - 1
+
     ans += 1
+    last = day
 
-while N - last > K:
-    last += K
+ans += (N - last) // K
 
 print(ans)
