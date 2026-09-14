@@ -74,4 +74,4 @@ for X in range(1, A + 1):
                     best = (X, Y)
 
 print(count)
-print(best[0], best[1])
+# print(best[0], best[1])
