@@ -3,36 +3,32 @@ import sys
 a = list(map(int, input().split()))
 ops = input().split()
 
-def solve(nums, step):
+def dfs(nums, step):
     if step == 3:
         return nums[0]
 
-    ans = float('inf')
+    best = 10**30
     op = ops[step]
+    m = len(nums)
 
-    n = len(nums)
-
-    for i in range(n):
-        for j in range(i + 1, n):
-            x = nums[i]
-            y = nums[j]
-
-            if op == "+":
-                value = x + y
-
+    for i in range(m):
+        for j in range(i + 1, m):
+            if op == '+':
+                val = nums[i] + nums[j]
             else:
-                value = x * y
+                val = nums[i] * nums[j]
 
-            new_nums = []
-
-            for k in range(n):
+            nxt = []
+            for k in range(m):
                 if k != i and k != j:
-                    new_nums.append(nums[k])
+                    nxt.append(nums[k])
 
-            new_nums.append(value)
+            nxt.append(val)
 
-            ans = min(ans, solve(new_nums, step + 1))
+            res = dfs(nxt, step + 1)
+            if res < best:
+                best = res
 
-        return ans
+    return best
 
-print(solve(a, 0))
+print(dfs(a, 0))
