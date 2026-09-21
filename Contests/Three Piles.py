@@ -9,7 +9,4 @@ t = int(input())
 
 for _ in range(t):
     a, b, c = map(int, input().split())
-
-    d = abs(a - b)
-
-    print(max(d, c - d))
+    print(abs(a - b) + c)
