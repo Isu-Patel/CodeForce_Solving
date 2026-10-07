@@ -11,7 +11,6 @@ for _ in range(n - 1):
     x, y, w = map(int, input().split())
     graph[x].append((y, w))
     graph[y].append((x, w))
-
     total += w
 
 stack = [(1, 0, 0)]
@@ -23,6 +22,6 @@ while stack:
 
     for v, w in graph[u]:
         if v != parent:
-            stack.append((v, y, dist + w))
+            stack.append((v, u, dist + w))
 
 print(2 * total - max_dist)
