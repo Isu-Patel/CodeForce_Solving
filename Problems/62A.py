@@ -1,20 +1,10 @@
-a, b = map(int, input().split())
-c, d = map(int, input().split())
+al, ar = map(int, input().split())
+bl, br = map(int, input().split())
 
-def possible(gl, gr, bl, br):
-    need_l = max(0, gl - 1)
-    need_r = max(0, gr - 1)
+def ok(g, b):
+    return g - 1 <= b <= 2 * (g + 1)
 
-    if bl < need_l or br < need_r:
-        return False
-
-    extra_l = bl - need_l
-    extra_r = br - need_r
-
-    return extra_l <= 2 and extra_r <= 2
-
-if possible(a, b, c, d) or possible(a, b, d, c):
+if (ok(al, br) and ok(ar, bl)) or (ok(al, bl) and ok(ar, br)):
     print("YES")
 else:
     print("NO")
-    
